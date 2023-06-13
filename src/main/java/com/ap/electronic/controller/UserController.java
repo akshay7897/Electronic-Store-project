@@ -3,6 +3,7 @@ package com.ap.electronic.controller;
 import java.util.List;
 
 import javax.validation.Valid;
+import javax.validation.constraints.AssertFalse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ap.electronic.dtos.ApiResponse;
@@ -55,9 +57,12 @@ public class UserController {
 
 	}
 
-	@GetMapping("/")
-	public ResponseEntity<List<UserDto>> getAllUsers() {
-		return new ResponseEntity<>(userService.getAllUsers(), HttpStatus.OK);
+	@GetMapping("/user")
+	public ResponseEntity<List<UserDto>> getAllUsers(
+			@RequestParam(value = "pagenumber",defaultValue = "0",required=false) Integer pageNumber,
+			@RequestParam(value = "pagesize",defaultValue = "10",required=false) Integer pageSize
+			) {
+		return new ResponseEntity<>(userService.getAllUsers(pageNumber,pageSize), HttpStatus.OK);
 	}
 	
 	@GetMapping("/get/{email}")

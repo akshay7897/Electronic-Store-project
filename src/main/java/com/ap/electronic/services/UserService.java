@@ -19,7 +19,7 @@ public interface UserService {
 	public UserDto getUserById(String userId);
 
 	// getall
-	public List<UserDto> getAllUsers();
+	public List<UserDto> getAllUsers(Integer pageNumber,Integer pageSize);
 	
 	//get by email
 	
