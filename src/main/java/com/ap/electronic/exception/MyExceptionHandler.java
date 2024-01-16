@@ -20,8 +20,9 @@ public class MyExceptionHandler {
 	@ExceptionHandler(ResourceNotFoundException.class)
 	public ResponseEntity<ApiResponse> resourceNotFoundExceptionHandler(ResourceNotFoundException ex) {
 
-		ApiResponse response = ApiResponse.builder().message(ex.getMessage()).success(true).build();
-
+		ApiResponse response = new ApiResponse();
+		response.setMessage(ex.getMessage());
+		response.setSuccess(Boolean.TRUE);
 		return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
 	}
 
