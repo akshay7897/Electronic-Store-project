@@ -3,6 +3,7 @@ package com.ap.electronic.controller;
 import java.util.List;
 
 import javax.validation.Valid;
+import javax.validation.constraints.AssertFalse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -41,11 +42,11 @@ public class UserController {
 	@DeleteMapping("/delete/{userId}")
 	public ResponseEntity<ApiResponse> deleteUser(@PathVariable String userId) {
 		
-		ApiResponse msg = new ApiResponse();
-		msg.setMessage("User Deleted");
-		msg.setSuccess(Boolean.TRUE);
-				
-		return new ResponseEntity<>(msg,HttpStatus.OK);
+		ApiResponse msg = ApiResponse.builder()
+							.message("User Deleted")
+							.success(true).build();
+		
+		return new ResponseEntity<ApiResponse>(msg,HttpStatus.OK);
 
 	}
 
@@ -69,7 +70,7 @@ public class UserController {
 		return new ResponseEntity<UserDto>(userService.getByEmail(email),HttpStatus.OK);
 	}
 
-	
+	// akshay patil
 	
 
 }
